@@ -24,3 +24,5 @@ _build/
 # common editor artifacts
 *~
 *.vscode*
+.idea
+cmake-build-debug
