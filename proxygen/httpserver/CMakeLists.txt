@@ -111,6 +111,27 @@ install(
     DESTINATION bin
 )
 
+add_executable(helloworldserver
+    samples/helloworld_handler/HelloWorldHandler.cpp
+    samples/helloworld_handler/HelloWorldServer.cpp
+)
+target_compile_options(
+    helloworldserver
+    PRIVATE
+        ${_PROXYGEN_COMMON_COMPILE_OPTIONS}
+)
+target_link_libraries(
+    helloworldserver
+    PUBLIC
+        proxygen
+        proxygenhttpserver
+)
+install(
+    TARGETS helloworldserver
+    EXPORT proxygen-exports
+    DESTINATION bin
+)
+
 if (BUILD_QUIC)
   add_executable(hq
       samples/hq/main.cpp
@@ -121,6 +142,7 @@ if (BUILD_QUIC)
       samples/hq/HQParams.cpp
       samples/hq/SampleHandlers.cpp
       samples/hq/PartiallyReliableCurlClient.cpp
+      #  samples/helloworld_handler/HelloWorldHandler.h samples/helloworld_handler/HelloWorldHandler.cpp samples/helloworld_handler/HelloWorldServer.cpp
   )
   target_compile_options(
       hq
